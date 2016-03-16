@@ -58,14 +58,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:layout_above="@+id/ii"
+        android:layout_above="@+id/footer"
         android:layout_below="@+id/header"
 
         android:background="@android:color/white"
         android:scaleType="fitCenter" />
 
     <RelativeLayout
-        android:id="@+id/ii"
+        android:id="@+id/footer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -86,21 +86,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:focusable="true"
             android:hint="Enter page no"
-            android:textSize="22sp" />
+            android:inputType="number"
+            android:maxLength="3"
+            android:textSize="20sp" />
 
         <Button
-            android:id="@+id/btn_next"
+            android:id="@+id/btn_go"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
             android:layout_centerVertical="true"
-            android:layout_marginRight="50dp"
-            android:layout_toRightOf="@+id/edittext"
+
+           android:layout_alignParentRight="true"
 
             android:text="Go to page"
             android:textSize="22sp"
-            android:focusableInTouchMode="true"
+
             android:textStyle="bold" />
     </RelativeLayout>
 

@@ -20,6 +20,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.widget.ZoomControls;
 
@@ -59,9 +60,10 @@ public class PDFRenderFragment extends Fragment {
     private float scale = 1f;
     private ScaleGestureDetector scaleGestureDetector;
     SubsamplingScaleImageView imageView;
-    Toast t1, t2;
-    int pagecount;
+    Toast t1,t2;
 
+    int w,h;
+    int pagecount;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -69,16 +71,21 @@ public class PDFRenderFragment extends Fragment {
     }
 
 
+
+
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Retain view references.
-        //  image = (ImageView) view.findViewById(R.id.image);
+      //  image = (ImageView) view.findViewById(R.id.image);
+
         btnPrevious = (EditText) view.findViewById(R.id.edittext);
-        btnNext = (Button) view.findViewById(R.id.btn_next);
+        btnNext = (Button) view.findViewById(R.id.btn_go);
         zoom = (ZoomControls) view.findViewById(R.id.zoomControls);
 
-
+w=100;
+        h=100;
         btn_previous_top = (Button) view.findViewById(R.id.btn_previous);
         btn_nxt_top = (Button) view.findViewById(R.id.btn_next1);
 
@@ -90,7 +97,7 @@ public class PDFRenderFragment extends Fragment {
 
         btnNext.setOnClickListener(onActionListener_click(1)); //next button clicked
 
-        imageView = (SubsamplingScaleImageView) view.findViewById(R.id.image);
+        imageView = (SubsamplingScaleImageView)view.findViewById(R.id.image);
 
 
         // SGD = new ScaleGestureDetector(getActivity().getApplicationContext(),new ScaleListener());
@@ -101,40 +108,16 @@ public class PDFRenderFragment extends Fragment {
         if (null != savedInstanceState) {
             index = savedInstanceState.getInt("current_page", 0);
         }
-        showPage(index);
-        btnPrevious.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                View view1 = getActivity().getCurrentFocus();
-                if (view1 != null) {
-                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.showSoftInputFromInputMethod(view1.getWindowToken(), 0);
-                }
-            }
-        });
 
 
-//        mScaleDetector = new ScaleGestureDetector(getActivity().getApplicationContext(), new ScaleGestureDetector.OnScaleGestureListener() {
+
+//        btnPrevious.setOnClickListener(new View.OnClickListener() {
 //            @Override
-//            public void onScaleEnd(ScaleGestureDetector detector) {
-//            }
-//            @Override
-//            public boolean onScaleBegin(ScaleGestureDetector detector) {
-//                return true;
-//            }
-//            @Override
-//            public boolean onScale(ScaleGestureDetector detector) {
+//            public void onClick(View v) {
 //
-//                scale *= detector.getScaleFactor();
-//                scale = Math.max(0.1f, Math.min(scale, 5.0f));
-//
-//                matrix.setScale(scale, scale);
-//                image.setImageMatrix(matrix);
-//
-//              //  Log.d(LOG_KEY, "zoom ongoing, scale: " + detector.getScaleFactor());
-//                return false;
 //            }
 //        });
+
 
         zoom.setOnZoomInClickListener(new View.OnClickListener() {
 
@@ -145,8 +128,29 @@ public class PDFRenderFragment extends Fragment {
                 float x = imageView.getScaleX();
                 float y = imageView.getScaleY();
 
+
+
                 imageView.setScaleX((float) (x + 0.1));
-                imageView.setScaleY((float) (y + 0.1));
+              imageView.setScaleY((float) (y + 0.1));
+
+//
+//                RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+//                        ViewGroup.LayoutParams.WRAP_CONTENT);
+//
+//                p.addRule(RelativeLayout.BELOW, R.id.header);
+//
+//                imageView.setLayoutParams(p);
+//
+//                RelativeLayout.LayoutParams p1 = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+//                        ViewGroup.LayoutParams.WRAP_CONTENT);
+//
+//                p1.addRule(RelativeLayout.ABOVE, R.id.footer);
+//
+//                imageView.setLayoutParams(p1);
+
+                imageView.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT/2;
+                imageView.getLayoutParams().width = ViewGroup.LayoutParams.WRAP_CONTENT/2;
+                imageView.requestLayout();
             }
         });
 
@@ -166,65 +170,33 @@ public class PDFRenderFragment extends Fragment {
 
             }
         });
-        //scaleGestureDetector = new ScaleGestureDetector(getActivity().getApplicationContext(), new ScaleListener());
+
+        showPage(index);
+
+
+//        btnPrevious.setFocusableInTouchMode(true);
+//        btnPrevious.requestFocus();
+//        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+//        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+
+//        final InputMethodManager inputMethodManager = (InputMethodManager) getActivity()
+//                .getSystemService(Context.INPUT_METHOD_SERVICE);
+//        inputMethodManager.showSoftInput(btnPrevious, InputMethodManager.SHOW_IMPLICIT);
+
+
+
+
+//        btnPrevious.post(new Runnable() {
+//            public void run() {
+//                btnPrevious.requestFocusFromTouch();
+//                InputMethodManager lManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+//                lManager.showSoftInput(btnPrevious, 0);
+//            }
+//        });
+
     }
 
-//    public boolean onTouchEvent(MotionEvent ev) {
-//        super.getActivity();
-//        scaleGestureDetector.onTouchEvent(ev);
-//        return true;
-//    }
 
-//    private class ScaleListener extends
-//            ScaleGestureDetector.SimpleOnScaleGestureListener {
-//        @Override
-//        public boolean onScale(ScaleGestureDetector detector) {
-//            scale *= detector.getScaleFactor();
-//            scale = Math.max(0.1f, Math.min(scale, 5.0f));
-//            matrix.setScale(scale, scale);
-//            image.setImageMatrix(matrix);
-//            return true;
-//        }
-//    }
-
-
-//    private class ScaleListener extends ScaleGestureDetector.
-//
-//            SimpleOnScaleGestureListener {
-//        @Override
-//        public boolean onScale(ScaleGestureDetector detector) {
-//            scale *= detector.getScaleFactor();
-//            scale = Math.max(0.1f, Math.min(scale, 5.0f));
-//
-//            matrix.setScale(scale, scale);
-//            image.setImageMatrix(matrix);
-//            return true;
-//        }
-//    }
-
-
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 
 
     @Override
@@ -306,7 +278,7 @@ public class PDFRenderFragment extends Fragment {
         // showing bitmap to an imageview
         imageView.setImage(ImageSource.bitmap(bitmap));
 
-        //  image.setImageBitmap(bitmap);
+      //  image.setImageBitmap(bitmap);
         updateUIData();
     }
 
@@ -316,9 +288,10 @@ public class PDFRenderFragment extends Fragment {
     private void updateUIData() {
         int index = currentPage.getIndex();
         pagecount = pdfRenderer.getPageCount();
-
-        btnPrevious.setEnabled(0 != index);
-        btnNext.setEnabled(index + 1 < pagecount);
+//        Toast t = Toast.makeText(getActivity().getApplicationContext(), pagecount + "", Toast.LENGTH_SHORT);
+//        t.show();
+        btn_previous_top.setEnabled(0 != index);
+        btn_nxt_top.setEnabled(index + 1 < pagecount);
         getActivity().setTitle(getString(R.string.app_name, index + 1, pagecount));
     }
 
@@ -329,22 +302,25 @@ public class PDFRenderFragment extends Fragment {
 
                 String page_No = btnPrevious.getText().toString();
 
-
+               // int p_n = Integer.parseInt(page_No);
+              //  int p_n=   Integer.parseInt(page_No);
                 if (page_No.equalsIgnoreCase("")) {
-                    t1 = Toast.makeText(getActivity().getApplicationContext(), " Enter Page No", Toast.LENGTH_SHORT);
+                     t1 = Toast.makeText(getActivity().getApplicationContext(), " Enter Page No", Toast.LENGTH_SHORT);
                     t1.show();
-                } else if (Integer.parseInt(page_No) > 484) {
-                    t2 = Toast.makeText(getActivity().getApplicationContext(), "Invalid Page No", Toast.LENGTH_SHORT);
+                }
+                else if(Integer.parseInt(page_No) >484)
+                {
+                     t2 = Toast.makeText(getActivity().getApplicationContext(), "Invalid Page No", Toast.LENGTH_SHORT);
                     t2.show();
-                } else {
-                    int p_n = Integer.parseInt(page_No);
+                }
+                else {
+                    int   p_n = Integer.parseInt(page_No);
                     showPage(p_n);
                     View view = getActivity().getCurrentFocus();
                     if (view != null) {
                         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                     }
-
                 }
 
 
