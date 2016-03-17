@@ -6,39 +6,39 @@
 
     >
 
-    <RelativeLayout
-        android:id="@+id/header"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+    <!--<RelativeLayout-->
+    <!--android:id="@+id/header"-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="wrap_content">-->
 
-        <Button
-            android:id="@+id/btn_previous"
+    <!--<Button-->
+    <!--android:id="@+id/btn_previous"-->
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="previous"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="previous"-->
+    <!--android:textSize="15sp"-->
+    <!--android:textStyle="bold" />-->
 
-        <Button
-            android:id="@+id/btn_next1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/btn_previous"
-            android:layout_weight="1"
-            android:text="next"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+    <!--<Button-->
+    <!--android:id="@+id/btn_next1"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_toRightOf="@+id/btn_previous"-->
+    <!--android:layout_weight="1"-->
+    <!--android:text="next"-->
+    <!--android:textSize="15sp"-->
+    <!--android:textStyle="bold" />-->
 
-        <ZoomControls
-            android:id="@+id/zoomControls"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="right" />
+    <!--<ZoomControls-->
+    <!--android:id="@+id/zoomControls"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_gravity="right" />-->
 
 
-    </RelativeLayout>
+    <!--</RelativeLayout>-->
 
     <!--<ImageView-->
     <!--android:layout_above="@+id/ii"-->
@@ -53,58 +53,111 @@
     <!--/>-->
 
 
-    <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
-        android:id="@+id/image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:layout_above="@+id/footer"
-        android:layout_below="@+id/header"
-
-        android:background="@android:color/white"
-        android:scaleType="fitCenter" />
-
     <RelativeLayout
-        android:id="@+id/footer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:gravity="center">
-
-        <!--<Button-->
-        <!--android:id="@+id/btn_previous"-->
-
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="60dp"-->
-        <!--android:layout_weight="1"-->
-        <!--android:text="previous"-->
-        <!--android:textSize="22sp"-->
-        <!--android:textStyle="bold" />-->
+        android:id="@+id/header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/edittext"
+            android:background="@null"
+            android:id="@+id/search"
+            android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:focusable="true"
-            android:hint="Enter page no"
-            android:inputType="number"
-            android:maxLength="3"
-            android:textSize="20sp" />
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="5dp"
+            android:hint="Search By Content Name " />
 
-        <Button
-            android:id="@+id/btn_go"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <!--<Button-->
 
-            android:layout_centerVertical="true"
+            <!--android:id="@+id/btn_previous"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:text="Index"-->
+            <!--android:textSize="15sp"-->
+            <!--android:textStyle="bold" />-->
 
-           android:layout_alignParentRight="true"
 
-            android:text="Go to page"
-            android:textSize="22sp"
-
-            android:textStyle="bold" />
     </RelativeLayout>
+
+
+    <!--<com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView-->
+    <!--android:id="@+id/image"-->
+
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+
+    <!--android:background="@android:color/white"-->
+    <!--android:scaleType="fitCenter" />-->
+
+
+    <ListView
+android:layout_marginTop="5dp"
+        android:id="@+id/list_calculator"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/header"
+        android:layout_gravity="left|top"
+
+        android:choiceMode="singleChoice"
+
+        android:dividerHeight="0.5dp" />
+
+
+    <!--<android.support.v4.view.ViewPager-->
+
+    <!--android:layout_below="@+id/header"-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="fill_parent"-->
+    <!--android:id="@+id/viewPager"-->
+
+    <!--/>-->
+
+
+    <!--<RelativeLayout-->
+    <!--android:id="@+id/footer"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:gravity="center">-->
+
+    <!--&lt;!&ndash;<Button&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/btn_previous"&ndash;&gt;-->
+
+    <!--&lt;!&ndash;android:layout_width="0dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="60dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_weight="1"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:text="previous"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:textSize="22sp"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:textStyle="bold" />&ndash;&gt;-->
+
+    <!--<EditText-->
+    <!--android:id="@+id/edittext"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:focusable="true"-->
+    <!--android:hint="Enter page no"-->
+    <!--android:inputType="number"-->
+    <!--android:maxLength="3"-->
+    <!--android:textSize="20sp" />-->
+
+    <!--<Button-->
+    <!--android:id="@+id/btn_go"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+
+    <!--android:layout_centerVertical="true"-->
+
+    <!--android:layout_alignParentRight="true"-->
+
+    <!--android:text="Go to page"-->
+    <!--android:textSize="22sp"-->
+
+    <!--android:textStyle="bold" />-->
+    <!--</RelativeLayout>-->
 
 </RelativeLayout>
