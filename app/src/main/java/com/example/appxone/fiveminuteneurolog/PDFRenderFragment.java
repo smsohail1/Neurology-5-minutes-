@@ -177,10 +177,11 @@ public class PDFRenderFragment extends Fragment {
 
 
                 int original_page_no = calculatormodel.get(position).getPage_no();
-
+              //  Toast t=Toast.makeText(getActivity().getApplicationContext(),original_page_no+"",Toast.LENGTH_SHORT);
+               // t.show();
 
                 Intent i = new Intent(getActivity().getApplicationContext(), second.class);
-                i.putExtra("posit", original_page_no);
+                i.putExtra("posit", original_page_no-1);
 
                 startActivity(i);
 
