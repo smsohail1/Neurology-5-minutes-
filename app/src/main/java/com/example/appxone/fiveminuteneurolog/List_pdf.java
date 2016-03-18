@@ -82,15 +82,19 @@ public class List_pdf  extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.viewpager_row, null);
 
 
+
         }
         //typeface=Typeface.createFromAsset(this.context.getAssets(),"fonts/AvenirLTStd-Roman.otf");
 
         //ImageView imgIcon = (ImageView) convertView.findViewById(R.id.calculator_img);
         TextView txtTitleindex = (TextView) convertView.findViewById(R.id.calculator_title);
+      //  TextView page_no = (TextView) convertView.findViewById(R.id.page_no);
+
 
         //txtTitleindex.setTypeface(typeface);
        // imgIcon.setImageResource(navDrawerItemssa.get(position).getImg());
         txtTitleindex.setText(navDrawerItemssa.get(position).getCalcuator_Title());
+       // page_no.setText(navDrawerItemssa.get(position).getPage_no());
 
         return convertView;
     }

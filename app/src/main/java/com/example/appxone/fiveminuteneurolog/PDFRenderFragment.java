@@ -3,6 +3,7 @@ package com.example.appxone.fiveminuteneurolog;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
@@ -26,12 +27,18 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.widget.ZoomControls;
 
 import android.content.IntentFilter;
+
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
@@ -83,8 +90,9 @@ public class PDFRenderFragment extends Fragment {
     public ArrayList<list_nodel> calculatormodel;
     public List_pdf calculator_adapter;
 
-    public ListView calculator_List;
+    public static ListView calculator_List;
 
+    LinearLayout l1;
     // public List_pdf adapter;
 
     @Override
@@ -109,6 +117,7 @@ public class PDFRenderFragment extends Fragment {
             isErrorOccured = true;
         }
         calculator_List = (ListView) view.findViewById(R.id.list_calculator);
+        l1 = (LinearLayout) view.findViewById(R.id.fragment_layout1);
         calculatormodel = new ArrayList<list_nodel>();
 
         calculatormodel.clear();
@@ -177,13 +186,25 @@ public class PDFRenderFragment extends Fragment {
 
 
                 int original_page_no = calculatormodel.get(position).getPage_no();
-              //  Toast t=Toast.makeText(getActivity().getApplicationContext(),original_page_no+"",Toast.LENGTH_SHORT);
-               // t.show();
+//                Toast t = Toast.makeText(getActivity().getApplicationContext(), original_page_no + "", Toast.LENGTH_SHORT);
+//                t.show();
+                SharedPreferences sharedpreferences = getActivity().getSharedPreferences("shared", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+                editor.putInt("pos", original_page_no - 1);
+                editor.commit();
+                // Intent i = new Intent(getActivity().getApplicationContext(), second.class);
+                //i.putExtra("posit", original_page_no-1);
 
-                Intent i = new Intent(getActivity().getApplicationContext(), second.class);
-                i.putExtra("posit", original_page_no-1);
 
-                startActivity(i);
+                calculator_List.setVisibility(View.GONE);
+                //startActivity(i);
+                l1.setVisibility(View.VISIBLE);
+
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.fragment_layout1, new second()).addToBackStack(null);
+                ft.commit();
+
 
 //                for (Map.Entry<Integer, Class> entry1 : Listview_Selection.entrySet()) {
 //                    if (entry1.getKey() == position) {
@@ -406,6 +427,17 @@ public class PDFRenderFragment extends Fragment {
 //            }
 //        });
 
+    }
+
+    @Override
+    public void onDestroy() {
+//        try {//closeRenderer();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+        MainActivity.btn.setVisibility(View.VISIBLE);
+        super.onDestroy();
     }
 
 

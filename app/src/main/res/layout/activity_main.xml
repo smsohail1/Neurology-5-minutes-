@@ -2,24 +2,33 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    >
 
-    <!--<Button-->
-        <!--android:id="@+id/btn_render"-->
+    <Button
+        android:id="@+id/btn_render"
 
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="80dp"-->
-        <!--android:layout_margin="15dp"-->
-        <!--android:text="Go To Pdf File"-->
-        <!--android:textSize="20sp" />-->
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="Index"
+        android:textSize="20sp" />
 
+    <!--<WebView-->
+        <!--android:layout_below="@+id/btn_render"-->
+<!--android:id="@+id/webview"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content">-->
+
+    <!--</WebView>-->
     <LinearLayout
-
+android:layout_below="@+id/btn_render"
         android:id="@+id/fragment_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:visibility="gone">
+       >
 
     </LinearLayout>
 

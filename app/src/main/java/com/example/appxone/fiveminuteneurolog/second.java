@@ -1,25 +1,37 @@
 package com.example.appxone.fiveminuteneurolog;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.pdf.PdfRenderer;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.ParcelFileDescriptor;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.widget.Toast;
 
+import android.os.ParcelFileDescriptor;
+//import android.support.v4.app.FragmentActivity;
+//import android.support.v7.app.ActionBarActivity;
+//import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import java.io.IOException;
 
 /**
  * Created by APPXONE on 3/17/2016.
  */
-public class second extends AppCompatActivity {
+//@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+public class second extends android.support.v4.app.Fragment {
     int pos;
     SubsamplingScaleImageView imageView;
     int pos_int;
@@ -30,52 +42,90 @@ public class second extends AppCompatActivity {
     int pagecount;
     Bitmap bitmap;
 
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.pdflayout);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.pdflayout, container, false);
+    }
 
-        imageView = (SubsamplingScaleImageView) findViewById(R.id.image);
-
-        Intent j = getIntent();
-        pos = j.getIntExtra("posit", 0);
-
-        /// pos_int = Integer.parseInt(pos);
+    //  @Override
+    //  public void onCreate(Bundle savedInstanceState) {
+    //  super.onCreate(savedInstanceState);
+    //   setContentView(R.layout.pdflayout);
 
 
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
+        imageView=(SubsamplingScaleImageView) view.findViewById(R.id.image);
+
+        SharedPreferences sharedpreferences = getActivity().getSharedPreferences("shared", Context.MODE_PRIVATE);
+        pos_int= sharedpreferences.getInt("pos",0);
+
+
+        showPage(pos_int);
+   // Intent j = getIntent();
+   // pos=j.getIntExtra("posit",0);
+
+    /// pos_int = Integer.parseInt(pos);
+
+
+//    try
+//
+//    {
+//      //  openRenderer(second.this);
+//        showPage(pos);
+//    }
+//
+//    catch(
+//    IOException e
+//    )
+//
+//    {
+//        e.printStackTrace();
+//        Log.i("Fragment", "Error occurred!");
+//        Log.e("Fragment", e.getMessage());
+//        second.this.finish();
+//    }
+
+
+    //openRenderer(getApplicationContext());
+
+
+    //  }
+
+
+
+}
+
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
         try {
-            openRenderer(second.this);
-            showPage(pos);
+            openRenderer(activity);
+
         } catch (IOException e) {
             e.printStackTrace();
             Log.i("Fragment", "Error occurred!");
             Log.e("Fragment", e.getMessage());
-            second.this.finish();
+            activity.finish();
         }
-        //openRenderer(getApplicationContext());
     }
-
-
-//    @Override
-//    public void onAttach(Activity activity) {
-//        super.onAttach(activity);
-//        try {
-//            openRenderer(activity);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            Log.i("Fragment", "Error occurred!");
-//            Log.e("Fragment", e.getMessage());
-//            activity.finish();
-//        }
-//    }
 
     @Override
     public void onDestroy() {
+        PDFRenderFragment.calculator_List.setVisibility(View.VISIBLE);
         try {
+
             closeRenderer();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         super.onDestroy();
     }
 
@@ -143,4 +193,5 @@ public class second extends AppCompatActivity {
         // btn_nxt_top.setEnabled(index + 1 < pagecount);
         // getActivity().setTitle(getString(R.string.app_name, index + 1, pagecount));
     }
+
 }
