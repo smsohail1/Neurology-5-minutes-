@@ -93,18 +93,18 @@ public class List_pdf extends BaseAdapter {
 
         //txtTitleindex.setTypeface(typeface);
         // imgIcon.setImageResource(navDrawerItemssa.get(position).getImg());
-        if (position == 2) {
-            txtTitleindex.setText(navDrawerItemssa.get(position).getCalcuator_Title());
-        } else if (position == 20) {
-            txtTitleindex.setText(navDrawerItemssa.get(position).getCalcuator_Title());
-        } else if (position == 32) {
-            txtTitleindex.setText(navDrawerItemssa.get(position).getCalcuator_Title());
-        } else {
+//        if (position == 2) {
+//            txtTitleindex.setText(navDrawerItemssa.get(position).getCalcuator_Title());
+//        } else if (position == 20) {
+//            txtTitleindex.setText(navDrawerItemssa.get(position).getCalcuator_Title());
+//        } else if (position == 32) {
+//            txtTitleindex.setText(navDrawerItemssa.get(position).getCalcuator_Title());
+//        } else {
             txtTitleindex.setText(navDrawerItemssa.get(position).getCalcuator_Title());
             txtTitleindex.setTypeface(typeface);
             page_no.setText(navDrawerItemssa.get(position).getOlder_page() + "");
             page_no.setTypeface(typeface);
-        }
+       // }
         // page_no.setText(navDrawerItemssa.get(position).getPage_no());
 
         return convertView;
