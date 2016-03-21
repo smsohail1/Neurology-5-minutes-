@@ -20,11 +20,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+
 import java.io.IOException;
 
 /**
@@ -60,17 +62,17 @@ public class second extends android.support.v4.app.Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-        imageView=(SubsamplingScaleImageView) view.findViewById(R.id.image);
+        imageView = (SubsamplingScaleImageView) view.findViewById(R.id.image);
 
         SharedPreferences sharedpreferences = getActivity().getSharedPreferences("shared", Context.MODE_PRIVATE);
-        pos_int= sharedpreferences.getInt("pos",0);
+        pos_int = sharedpreferences.getInt("pos", 0);
 
 
         showPage(pos_int);
-   // Intent j = getIntent();
-   // pos=j.getIntExtra("posit",0);
+        // Intent j = getIntent();
+        // pos=j.getIntExtra("posit",0);
 
-    /// pos_int = Integer.parseInt(pos);
+        /// pos_int = Integer.parseInt(pos);
 
 
 //    try
@@ -92,14 +94,13 @@ public class second extends android.support.v4.app.Fragment {
 //    }
 
 
-    //openRenderer(getApplicationContext());
+        //openRenderer(getApplicationContext());
 
 
-    //  }
+        //  }
 
 
-
-}
+    }
 
 
     @Override

@@ -436,7 +436,7 @@ public class PDFRenderFragment extends Fragment {
 //            e.printStackTrace();
 //        }
 
-        MainActivity.btn.setVisibility(View.VISIBLE);
+       // MainActivity.btn.setVisibility(View.VISIBLE);
         super.onDestroy();
     }
 

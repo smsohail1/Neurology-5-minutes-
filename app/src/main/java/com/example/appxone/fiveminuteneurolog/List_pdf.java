@@ -20,12 +20,13 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class List_pdf  extends BaseAdapter {
+public class List_pdf extends BaseAdapter {
 
-   // ArrayList<list_nodel> mStringFilterList;
+    // ArrayList<list_nodel> mStringFilterList;
 
 
-    private  Context context;
+    private Context context;
+
 
     private ArrayList<list_nodel> navDrawerItemssa;
 
@@ -45,7 +46,7 @@ public class List_pdf  extends BaseAdapter {
         this.navDrawerItemssa = navDrawerItemsa;
         this.arraylist = new ArrayList<list_nodel>();
         this.arraylist.addAll(navDrawerItemsa);
-       // fav_list = new ArrayList<String>();
+        // fav_list = new ArrayList<String>();
 
 
         Log.e("cunstructor", "cunstructor");
@@ -81,20 +82,30 @@ public class List_pdf  extends BaseAdapter {
                     context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.viewpager_row, null);
 
-
-
+            typeface = Typeface.createFromAsset(this.context.getAssets(), "fonts/Raleway-Bold.ttf");
         }
-        //typeface=Typeface.createFromAsset(this.context.getAssets(),"fonts/AvenirLTStd-Roman.otf");
+
 
         //ImageView imgIcon = (ImageView) convertView.findViewById(R.id.calculator_img);
         TextView txtTitleindex = (TextView) convertView.findViewById(R.id.calculator_title);
-      //  TextView page_no = (TextView) convertView.findViewById(R.id.page_no);
+        TextView page_no = (TextView) convertView.findViewById(R.id.pag);
 
 
         //txtTitleindex.setTypeface(typeface);
-       // imgIcon.setImageResource(navDrawerItemssa.get(position).getImg());
-        txtTitleindex.setText(navDrawerItemssa.get(position).getCalcuator_Title());
-       // page_no.setText(navDrawerItemssa.get(position).getPage_no());
+        // imgIcon.setImageResource(navDrawerItemssa.get(position).getImg());
+        if (position == 2) {
+            txtTitleindex.setText(navDrawerItemssa.get(position).getCalcuator_Title());
+        } else if (position == 20) {
+            txtTitleindex.setText(navDrawerItemssa.get(position).getCalcuator_Title());
+        } else if (position == 32) {
+            txtTitleindex.setText(navDrawerItemssa.get(position).getCalcuator_Title());
+        } else {
+            txtTitleindex.setText(navDrawerItemssa.get(position).getCalcuator_Title());
+            txtTitleindex.setTypeface(typeface);
+            page_no.setText(navDrawerItemssa.get(position).getOlder_page() + "");
+            page_no.setTypeface(typeface);
+        }
+        // page_no.setText(navDrawerItemssa.get(position).getPage_no());
 
         return convertView;
     }

@@ -20,20 +20,27 @@ public class MainActivity extends FragmentActivity {
     private View btnRender;
     private LinearLayout container;
     WebView webvew;
-  public  static   Button btn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-      //  webvew = (WebView) findViewById(R.id.webview);
-        btn = (Button) findViewById(R.id.btn_render);
+        container = (LinearLayout) findViewById(R.id.fragment_layout);
+        container.setVisibility(View.VISIBLE);
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.fragment_layout, new PDFRenderFragment());
+        ft.commit();
+
+        //  webvew = (WebView) findViewById(R.id.webview);
+        //btn = (Button) findViewById(R.id.btn_render);
         // btnRender = (View)findViewById(R.id.btn_render);
 
         //   WebView webView=new WebView(MainActivity.this);
 
 
-       // webvew.getSettings().setJavaScriptEnabled(true);
+        // webvew.getSettings().setJavaScriptEnabled(true);
 
 
         //webvew.settings.setBuiltInZoomControls(true);
@@ -46,25 +53,25 @@ public class MainActivity extends FragmentActivity {
 //        webvew.getSettings().setJavaScriptEnabled(true);
 //        webvew.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
 
-      //  String pdfURL = "file:///android_asset/5 Minute Neurology Consult - 2nd Edition.pdf";
+        //  String pdfURL = "file:///android_asset/5 Minute Neurology Consult - 2nd Edition.pdf";
         //webvew.loadUrl("http://docs.google.com/gview?embedded=true&url=" + pdfURL);
-      //  webvew.loadUrl(pdfURL);
+        //  webvew.loadUrl(pdfURL);
 
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Intent intent = new Intent(MainActivity.this, PDFRenderFragment.class);
-                // startActivity(intent);
-
-                container = (LinearLayout) findViewById(R.id.fragment_layout);
-                btn.setVisibility(View.GONE);
-              //  container.setVisibility(View.VISIBLE);
-                FragmentManager fm = getSupportFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.fragment_layout, new PDFRenderFragment()).addToBackStack(null);
-                ft.commit();
-            }
-        });
+//        btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // Intent intent = new Intent(MainActivity.this, PDFRenderFragment.class);
+//                // startActivity(intent);
+//
+//                container = (LinearLayout) findViewById(R.id.fragment_layout);
+//                btn.setVisibility(View.GONE);
+//              //  container.setVisibility(View.VISIBLE);
+//                FragmentManager fm = getSupportFragmentManager();
+//                FragmentTransaction ft = fm.beginTransaction();
+//                ft.replace(R.id.fragment_layout, new PDFRenderFragment()).addToBackStack(null);
+//                ft.commit();
+//            }
+//        });
 
 
         //webvew.loadUrl(rank[position]);
