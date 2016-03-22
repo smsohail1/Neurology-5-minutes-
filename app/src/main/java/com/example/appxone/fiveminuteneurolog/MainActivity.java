@@ -2,6 +2,7 @@ package com.example.appxone.fiveminuteneurolog;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.Window;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -20,18 +22,22 @@ public class MainActivity extends FragmentActivity {
     private View btnRender;
     private LinearLayout container;
     WebView webvew;
-
+  //public  static  View fg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        container = (LinearLayout) findViewById(R.id.fragment_layout);
+         container = (LinearLayout) findViewById(R.id.fragment_layout);
         container.setVisibility(View.VISIBLE);
+        //fg = findViewById(R.id.fragment_layout);
+         //fg.setVisibility(View.VISIBLE);
+       //fg.setVisibility(View.GONE);;
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.fragment_layout, new PDFRenderFragment());
         ft.commit();
+       // fg.setVisibility(View.VISIBLE);
 
         //  webvew = (WebView) findViewById(R.id.webview);
         //btn = (Button) findViewById(R.id.btn_render);
@@ -93,6 +99,8 @@ public class MainActivity extends FragmentActivity {
         //  btnRender.setOnClickListener(onClickListener());
 
     }
+
+
 //    private View.OnClickListener onClickListener() {
 //        return new View.OnClickListener() {
 //            @Override

@@ -49,6 +49,7 @@ public class second extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.pdflayout, container, false);
+
     }
 
     //  @Override
@@ -63,7 +64,7 @@ public class second extends android.support.v4.app.Fragment {
 
 
         imageView = (SubsamplingScaleImageView) view.findViewById(R.id.image);
-
+        // imageView.setVisibility(View.VISIBLE);
         SharedPreferences sharedpreferences = getActivity().getSharedPreferences("shared", Context.MODE_PRIVATE);
         pos_int = sharedpreferences.getInt("pos", 0);
 
@@ -120,6 +121,8 @@ public class second extends android.support.v4.app.Fragment {
     @Override
     public void onDestroy() {
         PDFRenderFragment.calculator_List.setVisibility(View.VISIBLE);
+
+        //  imageView.setVisibility(View.GONE);
         try {
 
             closeRenderer();

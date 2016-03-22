@@ -21,12 +21,22 @@
     <!--android:layout_height="wrap_content">-->
 
     <!--</WebView>-->
+
+
     <LinearLayout
-        android:id="@+id/fragment_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+    android:id="@+id/fragment_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
 
     </LinearLayout>
+
+
+    <!--<fragment-->
+
+        <!--android:id="@+id/fragment_layout"-->
+        <!--class="com.example.appxone.fiveminuteneurolog.PDFRenderFragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" />-->
 
 </RelativeLayout>

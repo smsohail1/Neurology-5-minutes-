@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.pdf.PdfRenderer;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.support.v4.app.Fragment;
@@ -92,7 +93,7 @@ public class PDFRenderFragment extends Fragment {
 
     public static ListView calculator_List;
 
-    LinearLayout l1;
+    public static LinearLayout l1;
     // public List_pdf adapter;
 
     @Override
@@ -117,7 +118,9 @@ public class PDFRenderFragment extends Fragment {
             isErrorOccured = true;
         }
         calculator_List = (ListView) view.findViewById(R.id.list_calculator);
+
         l1 = (LinearLayout) view.findViewById(R.id.fragment_layout1);
+
         calculatormodel = new ArrayList<list_nodel>();
 
         calculatormodel.clear();
@@ -144,6 +147,7 @@ public class PDFRenderFragment extends Fragment {
 //        calculatormodel.add(new list_nodel("ssesistor Color Code"));
 //
 //        calculatormodel.add(new list_nodel("aasistor Color Code"));
+
 
         if (!isErrorOccured) {
             String query = "SELECT * FROM '" + AppSetting.DATABASE_TABLE + "'";
@@ -176,34 +180,44 @@ public class PDFRenderFragment extends Fragment {
             calculator_adapter = new List_pdf(getActivity().getApplicationContext(), calculatormodel);
             calculator_List.setAdapter(calculator_adapter);
         }
+
+      //  l1.setVisibility(View.VISIBLE);
+
+        //calculator_List.setOnClickListener();
+
         // adapter=new List_pdf(getActivity().getApplicationContext(),calculatormodel);
+        // calculator_List.setVisibility(View.GONE);
+
         calculator_List.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-//                Toast t=Toast.makeText(getActivity().getApplicationContext(),position+"",Toast.LENGTH_SHORT);
-//                t.show();
+                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    // only for gingerbread and newer versions
 
 
-                int original_page_no = calculatormodel.get(position).getPage_no();
-//                Toast t = Toast.makeText(getActivity().getApplicationContext(), original_page_no + "", Toast.LENGTH_SHORT);
-//                t.show();
-                SharedPreferences sharedpreferences = getActivity().getSharedPreferences("shared", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedpreferences.edit();
-                editor.putInt("pos", original_page_no - 1);
-                editor.commit();
-                // Intent i = new Intent(getActivity().getApplicationContext(), second.class);
-                //i.putExtra("posit", original_page_no-1);
+                    int original_page_no = calculatormodel.get(position).getPage_no();
+////                Toast t = Toast.makeText(getActivity().getApplicationContext(), original_page_no + "", Toast.LENGTH_SHORT);
+////                t.show();
+                    SharedPreferences sharedpreferences = getActivity().getSharedPreferences("shared", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                    editor.putInt("pos", original_page_no - 1);
+                    editor.commit();
 
 
-                calculator_List.setVisibility(View.GONE);
-                //startActivity(i);
-                l1.setVisibility(View.VISIBLE);
+                    calculator_List.setVisibility(View.GONE);
+                    //startActivity(i);
+                    l1.setVisibility(View.VISIBLE);
 
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.fragment_layout1, new second()).addToBackStack(null);
-                ft.commit();
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    ft.replace(R.id.fragment_layout1, new second()).addToBackStack(null);
+                    ft.commit();
+                }
+                else {
+                    Toast t=Toast.makeText(getActivity().getApplicationContext(),"Pdf does not open in older version of android",Toast.LENGTH_SHORT);
+                    t.show();
+                }
 
 
 //                for (Map.Entry<Integer, Class> entry1 : Listview_Selection.entrySet()) {
@@ -429,6 +443,14 @@ public class PDFRenderFragment extends Fragment {
 
     }
 
+
+//    @Override
+//    public void onListItemClick(ListView l, View v, int position, long id) {
+////        TextFragment txt = (TextFragment)getFragmentManager().findFragmentById(R.id.fragment2);
+////        txt.change(AndroidOS[position],"Version : "+Version[position]);
+////        getListView().setSelector(android.R.color.holo_blue_dark);
+//    }
+
     @Override
     public void onDestroy() {
 //        try {//closeRenderer();
@@ -436,9 +458,48 @@ public class PDFRenderFragment extends Fragment {
 //            e.printStackTrace();
 //        }
 
-       // MainActivity.btn.setVisibility(View.VISIBLE);
+        // MainActivity.btn.setVisibility(View.VISIBLE);
         super.onDestroy();
     }
+
+//    @Override
+//    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//
+//
+//
+//    }
+
+//    @Override
+//    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//
+//
+//        int original_page_no = calculatormodel.get(position).getPage_no();
+////                Toast t = Toast.makeText(getActivity().getApplicationContext(), original_page_no + "", Toast.LENGTH_SHORT);
+////                t.show();
+//        SharedPreferences sharedpreferences = getActivity().getSharedPreferences("shared", Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedpreferences.edit();
+//        editor.putInt("pos", original_page_no - 1);
+//        editor.commit();
+//        // Intent i = new Intent(getActivity().getApplicationContext(), second.class);
+//        //i.putExtra("posit", original_page_no-1);
+//
+//
+//        calculator_List.setVisibility(View.GONE);
+//        //startActivity(i);
+//        l1.setVisibility(View.VISIBLE);
+//
+//        FragmentManager fm = getActivity().getSupportFragmentManager();
+//        FragmentTransaction ft = fm.beginTransaction();
+//        ft.replace(R.id.fragment_layout1, new second()).addToBackStack(null);
+//        ft.commit();
+//
+//    }
+
+//    @Override
+//    public void onNothingSelected(AdapterView<?> parent) {
+//
+//    }
 
 
 //    @Override
