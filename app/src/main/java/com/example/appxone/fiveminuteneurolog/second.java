@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.davemorrissey.labs.subscaleview.ImageSource;
@@ -43,6 +44,7 @@ public class second extends android.support.v4.app.Fragment {
     private PdfRenderer.Page currentPage;
     int pagecount;
     Bitmap bitmap;
+    ImageView next,previous;
 
 
     @Override
@@ -64,6 +66,25 @@ public class second extends android.support.v4.app.Fragment {
 
 
         imageView = (SubsamplingScaleImageView) view.findViewById(R.id.image);
+        previous = (ImageView) view.findViewById(R.id.previous_page);
+        next = (ImageView) view.findViewById(R.id.next_page);
+        previous.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+              pos_int-= 1;
+                showPage(pos_int);
+
+            }
+        });
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pos_int+= 1;
+                showPage(pos_int);
+            }
+        });
+
         // imageView.setVisibility(View.VISIBLE);
         SharedPreferences sharedpreferences = getActivity().getSharedPreferences("shared", Context.MODE_PRIVATE);
         pos_int = sharedpreferences.getInt("pos", 0);
@@ -193,8 +214,8 @@ public class second extends android.support.v4.app.Fragment {
         pagecount = pdfRenderer.getPageCount();
         //  Toast t = Toast.makeText(getActivity().getApplicationContext(), pagecount + "", Toast.LENGTH_SHORT);
         // t.show();
-        // btn_previous_top.setEnabled(0 != index);
-        // btn_nxt_top.setEnabled(index + 1 < pagecount);
+        previous.setEnabled(0 != index);
+        next.setEnabled(index + 1 < pagecount);
         // getActivity().setTitle(getString(R.string.app_name, index + 1, pagecount));
     }
 

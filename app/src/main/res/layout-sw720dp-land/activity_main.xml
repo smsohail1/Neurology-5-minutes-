@@ -6,7 +6,7 @@
     android:orientation="horizontal">
     <!-- "Fragment A" -->
     <fragment
-        android:id="@+id/list_frag"
+        android:id="@+id/fragment_layout"
         class="com.example.appxone.fiveminuteneurolog.PDFRenderFragment"
         android:layout_width="wrap_content"
         android:layout_height="match_parent" />
