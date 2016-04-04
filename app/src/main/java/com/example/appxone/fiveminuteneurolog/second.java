@@ -20,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.davemorrissey.labs.subscaleview.ImageSource;
@@ -37,14 +38,14 @@ import java.io.IOException;
 public class second extends android.support.v4.app.Fragment {
     int pos;
     SubsamplingScaleImageView imageView;
-    int pos_int;
-
+    int pos_int,pos_older;
+    TextView page_no;
     private ParcelFileDescriptor fileDescriptor;
     private PdfRenderer pdfRenderer;
     private PdfRenderer.Page currentPage;
     int pagecount;
     Bitmap bitmap;
-    ImageView next,previous;
+    ImageView next, previous;
 
 
     @Override
@@ -68,20 +69,42 @@ public class second extends android.support.v4.app.Fragment {
         imageView = (SubsamplingScaleImageView) view.findViewById(R.id.image);
         previous = (ImageView) view.findViewById(R.id.previous_page);
         next = (ImageView) view.findViewById(R.id.next_page);
+        page_no = (TextView) view.findViewById(R.id.page_no);
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-              pos_int-= 1;
+                pos_int -= 1;
+                pos_older-=1;
+                if(pos_older<=0)
+                {
+                    page_no.setText("");
+
+                }
+                else {
+
+                    page_no.setText(String.valueOf(pos_older));
+                }
                 showPage(pos_int);
+
 
             }
         });
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pos_int+= 1;
-                showPage(pos_int);
+                pos_int += 1;
+                pos_older+=1;
+                if(pos_older<=0)
+                {
+                    page_no.setText("");
+
+                }
+                else {
+                    page_no.setText(String.valueOf(pos_older));
+                }
+                    showPage(pos_int);
+
             }
         });
 
@@ -89,7 +112,10 @@ public class second extends android.support.v4.app.Fragment {
         SharedPreferences sharedpreferences = getActivity().getSharedPreferences("shared", Context.MODE_PRIVATE);
         pos_int = sharedpreferences.getInt("pos", 0);
 
+        SharedPreferences sharedpreferences1 = getActivity().getSharedPreferences("shared_pos", Context.MODE_PRIVATE);
+        pos_older = sharedpreferences1.getInt("pos_1", 0);
 
+        page_no.setText(String.valueOf(pos_older));
         showPage(pos_int);
         // Intent j = getIntent();
         // pos=j.getIntExtra("posit",0);

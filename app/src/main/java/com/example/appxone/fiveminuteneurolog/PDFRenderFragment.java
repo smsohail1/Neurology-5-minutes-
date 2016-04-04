@@ -204,6 +204,11 @@ public class PDFRenderFragment extends Fragment {
                     editor.putInt("pos", original_page_no - 1);
                     editor.commit();
 
+                    int older_page_no_1 = calculatormodel.get(position).getOlder_page();
+                    SharedPreferences sharedpreferences1 = getActivity().getSharedPreferences("shared_pos", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor1 = sharedpreferences1.edit();
+                    editor1.putInt("pos_1", older_page_no_1);
+                    editor1.commit();
 
                     calculator_List.setVisibility(View.GONE);
                     //startActivity(i);
